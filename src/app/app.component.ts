@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+ import { Component } from '@angular/core';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'FBUI';
+  title = 'app';
+  agree:boolean =false;
+
+  constructor(private router: Router) { }
+
+
+  agreed(val){
+    if (val==1){
+    this.agree=true;
+    this.router.navigate(['/book']);}
+    else if(val==2){
+    this.agree=true;
+    this.router.navigate(['/view']);}
+  }
 }

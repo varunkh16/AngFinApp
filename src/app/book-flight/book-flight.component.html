@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-5 col-md-offset-4">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Book the Flight</div>
+      <div class="panel-body">
+
+        <form [formGroup]="bookingForm" (submit)="book()" class="form">
+          <div class="form-control">
+            <label for="passengerName">Passenger Name</label>
+            <input type="text" formControlName="passengerName" name="passengerName" id="passengerName">
+            <span class="error-message" *ngIf = "bookingForm.controls.passengerName.touched && bookingForm.controls.passengerName.invalid">
+              <span class="error-message" *ngIf = "bookingForm.controls.passengerName.errors?.required">Required field</span>
+            </span>
+          </div>
+
+          <div class="form-control">
+            <label for="noOfTickets">No Of Tickets</label>
+            <input type="number" formControlName="noOfTickets" min="1" name="noOfTickets" id="noOfTickets">
+            <span class="error-message" *ngIf="bookingForm.controls.noOfTickets.touched && bookingForm.controls.noOfTickets.invalid">
+              <span class="error-message" *ngIf="bookingForm.controls.noOfTickets.errors?.required">Required field</span>
+              <span class="error-message" *ngIf="bookingForm.controls.noOfTickets.errors?.min">No of Tickets should be atleast 1</span>
+            </span>
+          </div>
+
+          <div class="form-control">
+            <label for="flightId">Flight Id</label>
+            <input type="text" formControlName="flightId" minlength="1" name="flightId" id="flightId">
+            <span class="error-message" *ngIf="bookingForm.controls.flightId.touched && bookingForm.controls.flightId.invalid">
+              <span class="error-message" *ngIf="bookingForm.controls.flightId.errors?.required">Required Field</span>
+              <span class="error-message" *ngIf="bookingForm.controls.flightId.errors?.minlength">Minimum length is 7</span>
+              <span class="error-message" *ngIf="bookingForm.get('flightId').errors.validFlightNumber">Invalid Flight Number</span>
+            </span>
+          </div>
+
+          <div class="form-control">
+            <button type="submit" class="btn btn-primary" [disabled]="!bookingForm.valid">Book</button>
+          </div>
+
+        </form>
+
+        <div *ngIf="errorMessage!=null">
+          <span class="error">{{errorMessage}}</span>
+        </div>
+        <div *ngIf="successMessage!=null">
+          <span class="success">{{successMessage}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
