@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-md-5 col-md-offset-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Solar Heater Bookings</div>
+            <div class="panel-body">
+                <p>Please select Heater Id below:</p>
+                <select class="form-control" [(ngModel)]="selectedId" (change)="displaySelected()">
+                    <option [value]="heater" *ngFor="let heater of solarHeaterIds" >{{heater}}</option>
+                </select>
+                <div *ngIf="selectedSolar">
+                    <br>
+                    <div>
+                        <h4>Details of Solar Id: {{ selectedSolar.solarHeaterId }}</h4>
+                    </div>  
+                    <br>
+                <table class="table table-bordered">
+                        <tr>
+                          <th>Customer ID </th>
+                          <th>Distributor Name</th>
+                          <th>Purchase Date</th>
+                          <th>Installation Date</th>
+                  
+                        </tr>
+                        <tr>
+                          <td>{{ selectedSolar.customerId }}</td>
+                          <td>{{ selectedSolar.distributorName }}</td>
+                          <td>{{ selectedSolar.purchaseDate}}</td>
+                          <td>{{ selectedSolar.installationDate | daysCount | number :'2.0-0'  }} days remaining</td>
+                        </tr>
+                      
+                      </table>
+                    </div>
+                <div *ngIf="errorMessage!=null">
+                    <span class="text-danger">{{errorMessage}}</span>
+                </div>
+                <div *ngIf="successMessage!=null">
+                    <span class="text-success">{{successMessage}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
